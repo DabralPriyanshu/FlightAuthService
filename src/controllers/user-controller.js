@@ -23,5 +23,25 @@ const create = async (req, res) => {
     });
   }
 };
+const getById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await userService.getById(id);
+    return res.status(200).json({
+      message: "Successfully fetched a user",
+      data: response,
+      success: true,
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "No able to fetch the  user",
+      data: {},
+      success: false,
+      err: error,
+    });
+  }
+};
 
-module.exports = { create };
+module.exports = { create, getById };
