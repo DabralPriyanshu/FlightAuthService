@@ -44,4 +44,27 @@ const getById = async (req, res) => {
   }
 };
 
-module.exports = { create, getById };
+const signIn = async (req, res) => {
+  try {
+    const response = await userService.signIn(
+      req.body.email,
+      req.body.password,
+    );
+    return res.status(200).json({
+      message: "Successfully signed in",
+      data: response,
+      success: true,
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Sign in failed",
+      data: {},
+      success: false,
+      err: error,
+    });
+  }
+};
+
+module.exports = { create, getById, signIn };
