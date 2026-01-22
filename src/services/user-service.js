@@ -35,6 +35,10 @@ class UserService {
       const newJwt = this.createToken({ email: user.email, id: user.id });
       return newJwt;
     } catch (error) {
+      console.log(error);
+      if (error.name == "Client Error") {
+        throw error;
+      }
       console.log("Something went wrong in service layer");
       throw error;
     }
